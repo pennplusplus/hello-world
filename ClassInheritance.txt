@@ -1,0 +1,105 @@
+Inheritance: allows one class (subclass) to use and modify the public variables and methods of another class (superclass)
+Polymorphism: declaring a uniform interface that isnt type aware, leaving implementation details to concrete types that implement the interface
+
+Superclass: a class that is used as the basis for inheritance
+Subclass: a class that extends another class
+Test class: class used to examine relationships between other classes
+	public class ScratchPad {
+		public static coid main(String[] args) {
+			//test code goes here
+				
+		}
+	}
+
+
+
+Interface: Defines some functionality, which must be implemented in a sublcass. Every defined method must be public. There is no implementation here (ex. vehicle)
+	public interface Vehicle {
+		
+	}
+
+
+Abstract Class: Defines some functionality which much be implemented in a sublcass. There is some implementation here, but an abstract class cannot create new objects (ex. car)
+	public abstract class Car implements Vehicle {
+		
+	}
+
+	public abstract class Truck implements Vehicle {
+		
+	}
+
+
+Class: Implements a superclass or extends an abstract class. This is where majority of Implementation clode is, and this is used when creating new objects (ex. honda civic)
+	public class HondaCivic extends Car {
+		
+	}
+
+	public Class Mazda3 extends Car {
+		
+	}
+
+	public Class 18Wheeler extends Truck {
+		
+	}
+
+In this example, the Vehicle interface acts as a Superclass for the Car abstract class. Then HondaCivic is a subclass of Vehicle.
+Properties of the interface are inherited by all abstract classes which implement it. Likewise, properties of the abstract class
+are inherited by all subclasses of the abstract class.
+
+	ex.)	All Vehicles have an engine => All Trucks have an engine => All Trucks have engines
+			""		    => All Cars have an engine => All HondaCivics have engines
+			""		    =>	 	  ""	       => All Mazda3s have engines
+					    
+	ex.)	All Cars have four wheels => All HondaCivics have four wheels
+			however, not all Vehicles have four wheels
+
+	ex.)	All HondaCivics have VTEC engine technology
+			however, not all Cars have VTEC; and by extension not all Vehicles have VTEC
+				Mazda3 doesnt have VTEC and 18Wheeler doesnt have VTEC
+
+ArrayList<Car> someCars;
+someCars = new ArrayList<Car>() //creates a generic arrayList of cars
+				//any type of car may be added to this arrayList
+				//however, the compiler won't know which type of car you will insert at index
+				//if you try to get a Mazda3 where a HondaCivic is stored, you will get an Error
+ArrayList<Car> someCivics;
+someCivics = new ArrayList<HondaCivic>(); //creates a specific arrayList of HondaCivics
+					  //only HondaCivics may be added to this arrayList
+					  //if you try to add a Mazda3 to this arrayList, you will get an Error
+
+
+Below is an example of Polygon classes implemented using these types of Objects. In this example, all polygons have a
+computeArea() method that returns a double that represents the area of that specific polygon. computeArea() has a
+declaration in the Polygon abstract class, but is implmented induvidually for each of its subclasses.
+
+This makes sense, because calculating the area of a Triangle and the area of a Rectangle require different algorithms,
+even though we are accomplishing the same task.
+
+public interface Shape {
+
+}
+
+public abstract class Polygon {
+	double computeArea(); 
+
+}
+
+public Class Triangle {
+	double computeArea() {
+		//area = (base * height) / 2;
+	}
+}
+
+public Class Rectangle {
+	double computeArea() {
+		//area = base * height;
+	}
+
+}
+
+All Squares are also considered Rectangles, but not all Rectangles are considered Squares. Because of this, we represent the
+Square Class as a subclass of Rectangle.
+
+public Class Square {
+
+}

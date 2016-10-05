@@ -1,0 +1,97 @@
+Model View Controller (MVC) Design Platform consists of three components for an application.
+	Model : represents the data and rules that govern access and updates of this data. In enterprise software, a model often serves as an
+		approximation of a real world process.
+	View : renders the contents of a model. It specifies exactly how the model data should be presented. If the model data changes, the view
+		must update its presentation as needed.
+	Controller :  Translates the user's interactions with the view into actions the model will perform.
+
+
+Strategically, there should be at least one controller class that contains the main method for the program's execution. This main method should also
+contain an event handler. There should also be at least one Model class that stores and manipulates data. Finally, the view class should extend the 
+JFrame class to display information to the user.
+
+Musicplayer example using a MVC Design consisting of four object classes.
+
+
+(Model)				(Model)				(View)					(Controller)
+Song.java			Player.java			MusicPlayerView.java			MusicPlayerController.java
+-title:String												+_main(String[] args)
+-artist:String
+-format:String
+
+
+A view consists of a few basic components:
+	JFrame : Overall application framework, lowest layer of the GUI
+	JPanel : What the user sees, always covers the JFrame
+	container : object which holds all buttons, lists, etc.
+	JScrollPane : Can hold a list of strings representing objects, etc.
+	JButton : One of many ways a user can interact with the application
+	menu bar : Usually contains a title for that view window
+
+
+The JFrame API in java allows for creation of basic graphical user interfaces in java programs. Below is an example for a music player application.
+(Sidenote: Any time you create a private ArrayList, you always want to initialize it before using it for data storage)
+
+
+import java.awt.Dimension; //allows for use of JFrame methods
+
+public class MusicPlayerView extends JFrame { //any view is simply a TYPE of JFrame
+
+	private JButton btnPlay;  //button to play a song
+	private JButton btnStop;  //button to stop a song
+	private JPanel container; //contains all elements in application
+	private JList listSongs;
+
+
+
+	this.container = newJPanel();
+	getContentPane().add(container);
+
+	this.btnPlay = newJbutton("Play");
+	this.btnPlay.setPreferredSize(new Dimension(100, 30));
+	container.add(btnPlay);
+
+	this.btnStop = newJbutton("Stop");
+	this.btnStop.setPreferredSize(new Dimension(100, 30));
+	container.add(btnStop);
+	
+	this.listSongs = newJList<Song>(); //make sure we have a Song object to create!
+	
+	
+	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	this.setSize(400, 300);
+	this.setVisible(true);
+}
+
+public static void main(String[] args) {
+	MusicPlayerView playerWindow = new MusicPlayerView(); //used to test our view window
+}
+
+
+Event handlers are reigstered to GUI components in order to listen for relevant events. Register a handler to react with a certain action when
+the user presses a button. Event handler flow of control goes as follows:
+	Program is run
+	User View is initialized
+		Buttons are created
+		Listeners registered to these buttons
+		Buttons are displayed
+	User Clicks a button
+		An action event is created
+		Event is dispatched to actionPerformed
+
+Java Swing proviedes interfaces to facilitate event handling
+	For JButton, JTextField, JPasswordField : ActionListener
+	For JCheckBox : ItemListener
+	For JList : ListSelectionListener
+	For mouse events : MouseListener and MouseMotionListener
+
+public class SimpleButtonListener implements ActionListener {
+	AbstractButton button;
+	JLabel statusBar;
+
+	public SimpleButtonListener(AbstractButton button, JLabel statusBar) {
+		this.button = button;
+		this.statusBar = statusBar;
+	}
+	
+	
